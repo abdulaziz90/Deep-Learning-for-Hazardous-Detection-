@@ -3,7 +3,7 @@
 This repository provides code for deep learning models that estimate hazardous material release parameters from satellite imagery. The methods were developed as part of the following works:
 
 - 📄 [IEEE SSPD 2023 Paper: Investigation of an End-to-End Neural Architecture for Image-Based Source Term Estimation](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10715304)
-- 📄 SSP 2025 Submission: *A Variational Autoencoder with Semi-Supervised Latent Space for Source Term Estimation*
+- 📄 IEEE SSP 2025 Submission: *A Variational Autoencoder with Semi-Supervised Latent Space for Source Term Estimation*
 
 ---
 
@@ -29,7 +29,7 @@ This repository implements a full pipeline for **Source Term Estimation (STE)** 
 
 ```
 .
-├── data/               # Auto-downloaded datasets (simulated & real)
+├── Data/               # Auto-downloaded datasets and checkpoints for trained models
 ├── models/             # U-Net, VAE, and DDL model architectures
 ├── training/           # Training scripts and configs
 ├── evaluation/         # Metrics, visualisations, and benchmarks
@@ -39,21 +39,10 @@ This repository implements a full pipeline for **Source Term Estimation (STE)** 
 
 ---
 
-## 📦 Datasets
-
-### 🔬 Simulated Dataset
+## 📦 Dataset
 - Based on a Gaussian puff dispersion model.
 - RGB satellite-like images (968×937×3), cropped to 128×128.
 - Ground truth available for source location, wind speed, and release time.
-
-### 🌍 Real-World Data: Jack Rabbit II Trial 7
-- Aerial footage processed with the Segment Anything Model (SAM).
-- Cloud shapes extracted via segmentation masks.
-- Used for real-world validation of STE models.
-
-### 🚀 Automatic Download
-When running the training or evaluation scripts, all required datasets will be **automatically downloaded** to the `data/` directory. No manual intervention is needed.
-
 ---
 
 ## 🏗️ Models
@@ -96,35 +85,31 @@ pip install -r requirements.txt
 
 ## 🏃‍♂️ Training
 
+### Train the 3D U-Net model
+```bash
+python train.py -c configs/unet.yaml --temporal_resolution 20 --save_name 'unet_T=20' --max_epochs 100 --gpu 0
+
 ### Train the VAE model
 ```bash
-python training/train_vae.py --config configs/vae_config.yaml
+python train.py -c configs/vae.yaml --temporal_resolution 20 --save_name 'vae_T=20' --max_epochs 100 --gpu 0
 ```
 
 ### Train the DDL model
 ```bash
-python training/train_ddl.py --config configs/ddl_config.yaml
+python train.py -c configs/ddl.yaml --temporal_resolution 20 --save_name 'ddl_T=20' --max_epochs 100 --gpu 0
 ```
 
 ---
 
 ## 🧪 Evaluation
 
+For testing only, pretrained checkpoints used in the papers will be automatically downloaded from the cloud.
+
 Evaluate a trained model on the test set:
 
 ```bash
-python evaluation/evaluate.py --model vae --checkpoint path/to/vae_checkpoint.ckpt
+python test.py -c configs/vae.yaml --temporal_resolution 20 --save_name 'vae_T=20'
 ```
-
-Visualise predictions, uncertainty bounds, or overlay frames from Jack Rabbit II validation.
-
----
-
-## 📸 Visualisation Tools
-
-- Plot predicted vs. true source parameters  
-- Display model uncertainty  
-- Overlay estimates on real-time cloud masks
 
 ---
 
@@ -137,7 +122,7 @@ If you use this code, please cite the following works:
 @article{abdulaziz2025vae,
   title={A Variational Autoencoder with Semi-Supervised Latent Space for Source Term Estimation},
   author={Abdullah Abdulaziz, Mike E. Davies, Steve McLaughlin, Yoann Altmann},
-  journal={Submitted to SSP 2025},
+  journal={Submitted to IEEE SSP 2025},
   year={2025}
 }
 ```
