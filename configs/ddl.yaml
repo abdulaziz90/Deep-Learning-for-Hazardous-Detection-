@@ -1,0 +1,25 @@
+model_params:
+  name: 'DDL'
+
+data_params:
+  data_path: "Data"
+  temporal_resolution: 20 #10 or 20
+  train_batch_size: 30
+  val_batch_size:  30
+
+exp_params:
+  LR: 0.001
+  weight_decay: 0.0
+  scheduler_gamma: 1
+  manual_seed: 42
+
+trainer_params:
+  gpus: [0]
+  max_epochs: 1000
+
+logging_params:
+  save_dir: "Data"
+  save_name: "ddl_T=20"
+
+test_params:
+  test_params: True

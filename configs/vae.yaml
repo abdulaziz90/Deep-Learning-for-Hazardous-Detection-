@@ -1,0 +1,35 @@
+model_params:
+  name: 'VAE'
+  latent_dim2: 64
+  cloud_weight: 1000
+  kl_weight1: 1
+  kl_weight2: 0.5
+  param_weight: 1
+  arch_option: 'spatial_attention' 
+  lstm_option: 'temporal_attention'
+
+data_params:
+  data_path: "Data"
+  temporal_resolution: 10 #10 or 20
+  train_batch_size: 30
+  val_batch_size:  30
+
+exp_params:
+  LR: 0.0001
+  weight_decay: 0.0
+  scheduler_gamma: 1
+  manual_seed: 42
+
+trainer_params:
+  gpus: [1]
+  max_epochs: 1000
+
+logging_params:
+  save_dir: "Data"
+  save_name: "vae_T=20"
+
+test_params:
+  test_params: True
+  test_cloud: False
+  cloud_id: 10
+  generate_cloud: False
