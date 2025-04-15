@@ -148,4 +148,4 @@ This work was supported by the Engineering and Physical Sciences Research Counci
 
 ## 📬 Contact
 
-For questions or collaborations, contact **a.abdulaziz90@hotmail.com**.
+For questions or collaborations, contact **aazizai@proton.me (Academic: a.abdulaziz@hw.ac.uk)**.
