@@ -25,24 +25,21 @@ This repository implements a full pipeline for **Source Term Estimation (STE)** 
 
 ---
 
-## 📁 Repository Structure
+## 📦 Datasets
 
-```
-.
-├── Data/               # Auto-downloaded datasets and checkpoints for trained models
-├── models/             # U-Net, VAE, and DDL model architectures
-├── training/           # Training scripts and configs
-├── evaluation/         # Metrics, visualisations, and benchmarks
-├── utils/              # Helper functions and utilities
-└── README.md           # This file
-```
-
----
-
-## 📦 Dataset
+### 🔬 Simulated Dataset
 - Based on a Gaussian puff dispersion model.
-- RGB satellite-like images (968×937×3), cropped to 128×128.
+- RGB satellite-like images (968×937×3), cropped to 128×128X3.
 - Ground truth available for source location, wind speed, and release time.
+
+### 🌍 Real-World Data: Jack Rabbit II Trial 7
+- Aerial footage processed with the Segment Anything Model (SAM).
+- Cloud shapes extracted via segmentation masks.
+- Used for real-world validation of STE models.
+
+### 🚀 Automatic Download
+When running the training or evaluation scripts, all required datasets will be **automatically downloaded** to the `Data/` directory. No manual intervention is needed.
+
 ---
 
 ## 🏗️ Models
@@ -68,16 +65,19 @@ This repository implements a full pipeline for **Source Term Estimation (STE)** 
 
 ### Requirements
 
+You can either:
+
+**Option 1: Use Docker (recommended for reproducibility)**
+- A ready-to-use `Dockerfile` is provided in the root directory.
+
+**Option 2: Install manually**
 - Python 3.8+
 - PyTorch ≥ 1.10
 - numpy, matplotlib, scipy
 - (Optional) CUDA-enabled GPU for training
 
-### Installation
-
+Use `requirements.txt` to install dependencies:
 ```bash
-git clone https://github.com/your-username/Deep-Learning-for-Hazardous-Detection.git
-cd Deep-Learning-for-Hazardous-Detection
 pip install -r requirements.txt
 ```
 
